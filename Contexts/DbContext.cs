@@ -1,12 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using SIR.Models;
 
 namespace SIR.Contexts
 {
-    public class DbContext
+    public class ApplicationDbContext : DbContext
     {
-        
+        public ApplicationDbContext
+        (
+            DbContextOptions<ApplicationDbContext> options
+        ) : base(options)
+        {
+
+        }
+
+        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Equipamento> Equipamentos { get; set; }
+        public DbSet<Reserva> Reservas { get; set; }
     }
 }
