@@ -159,3 +159,6 @@ C:\Users\54157995830\Documents\SIR\obj\Debug\net10.0\refint\SIR.dll
 C:\Users\54157995830\Documents\SIR\obj\Debug\net10.0\SIR.pdb
 C:\Users\54157995830\Documents\SIR\obj\Debug\net10.0\SIR.genruntimeconfig.cache
 C:\Users\54157995830\Documents\SIR\obj\Debug\net10.0\ref\SIR.dll
+C:\Users\54157995830\Documents\SIR\obj\Debug\net10.0\compressed\4p095k17zp-{0}-f81qlg8bvv-f81qlg8bvv.gz
+C:\Users\54157995830\Documents\SIR\obj\Debug\net10.0\compressed\s6ale7mir6-{0}-bbs65s277b-bbs65s277b.gz
+C:\Users\54157995830\Documents\SIR\obj\Debug\net10.0\compressed\h4z0z9zl4h-{0}-kpfxlcr9it-kpfxlcr9it.gz

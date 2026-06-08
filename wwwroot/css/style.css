@@ -1,0 +1,269 @@
+/* ══════════════════════════════════════════════
+   DESIGN SYSTEM — Sistema de Reservas
+   Shared styles across all pages
+   ══════════════════════════════════════════════ */
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Variables ── */
+:root {
+  --bg:         #0f0f0f;
+  --bg2:        #141414;
+  --bg3:        #1c1c1c;
+  --bg4:        #222222;
+  --border:     rgba(255,255,255,0.07);
+  --red:        #e03030;
+  --red-dark:   #b82222;
+  --red-glow:   rgba(224,48,48,0.20);
+  --green:      #22c55e;
+  --green-bg:   rgba(34,197,94,0.12);
+  --yellow:     #f59e0b;
+  --yellow-bg:  rgba(245,158,11,0.12);
+  --gray:       #555;
+  --gray-bg:    rgba(100,100,100,0.12);
+  --text:       #f0f0f0;
+  --text-muted: #888;
+  --text-dim:   #555;
+  --input-bg:   #1a1a1a;
+  --transition: 0.22s cubic-bezier(.4,0,.2,1);
+  --sidebar-w:  220px;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ── Input shared ── */
+input[type=email],
+input[type=password],
+input[type=text],
+input[type=number],
+input[type=date],
+select {
+  width: 100%;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 13px 14px 13px 42px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+input::placeholder { color: var(--text-dim); }
+
+input:focus,
+select:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(224,48,48,0.12);
+}
+
+/* ── Status Pills ── */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-pill svg { width: 13px; height: 13px; }
+
+.status-pill.disponivel  { background: var(--green-bg); color: var(--green); }
+.status-pill.em-uso      { background: var(--yellow-bg); color: var(--yellow); }
+.status-pill.indisponivel { background: rgba(224,48,48,0.12); color: var(--red); }
+.status-pill.ativo  { background: var(--green-bg); color: var(--green); }
+.status-pill.inativo { background: var(--gray-bg); color: var(--text-dim); }
+
+.status-pill .pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-pill.ativo .pill-dot   { background: var(--green); }
+.status-pill.inativo .pill-dot { background: var(--text-dim); }
+
+/* ── Help Button ── */
+.help-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+  z-index: 100;
+}
+
+.help-btn:hover {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+/* ── Toast ── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 14px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.3s cubic-bezier(.4,0,.2,1), opacity 0.3s;
+  z-index: 999;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.toast .toast-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.toast.success .toast-dot { background: var(--green); }
+.toast.error   .toast-dot { background: var(--red); }
+
+/* ── Modal Overlay ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+
+.modal {
+  background: var(--bg3);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 32px;
+  width: 400px;
+  max-width: 90vw;
+  transform: translateY(20px) scale(0.97);
+  transition: transform 0.25s cubic-bezier(.4,0,.2,1);
+}
+
+.modal h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+.modal p   { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+
+.modal-field { margin-bottom: 14px; }
+.modal-field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: var(--text-muted);
+}
+
+.modal-field input,
+.modal-field select {
+  background: var(--bg4);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.modal-field select option { background: var(--bg4); }
+
+.modal-actions { display: flex; gap: 10px; margin-top: 6px; }
+
+.btn-cancel {
+  flex: 1;
+  padding: 11px;
+  background: var(--bg4);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-cancel:hover { color: var(--text); }
+
+.btn-confirm {
+  flex: 2;
+  padding: 11px;
+  background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 2px 14px rgba(224,48,48,0.3);
+}
+
+.btn-confirm:hover {
+  box-shadow: 0 4px 24px rgba(224,48,48,0.5);
+  transform: translateY(-1px);
+}
+
+/* ── Keyframes ── */
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(224,48,48,0.6); }
+  50%      { box-shadow: 0 0 0 6px rgba(224,48,48,0); }
+}
+
+@keyframes floatShape {
+  from { transform: rotate(45deg) translateY(0); opacity: 0.4; }
+  to   { transform: rotate(45deg) translateY(-18px); opacity: 0.8; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.3; }
+}
+
+/* ── Two Column Grid ── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
