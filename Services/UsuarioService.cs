@@ -1,14 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using SIR.Models;
+using SIR.Contexts;
+using Microsoft.EntityFrameworkCore;
 
-using SIR.Interfaces;
-
-namespace SIR.Services
+public class UsuarioService : IUsuarioService
 {
-    public class UsuarioService : IUsuarioService
+    private readonly ApplicationDbContext  _context;
+
+    public UsuarioService(ApplicationDbContext  context)
     {
-        
+        _context = context;
+    }
+
+    public async Task<Usuario> CadastrarAsync(Usuario usuario)
+    {
+        _context.Usuarios.Add(usuario);
+        await _context.SaveChangesAsync();
+
+        return usuario;
     }
 }

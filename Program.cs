@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
 // DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

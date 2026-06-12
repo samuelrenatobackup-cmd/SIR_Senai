@@ -9,8 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
-  
-  <link rel="stylesheet" href="~/css/login.css" /> 
+  <link rel="stylesheet" href="~/css/login.css" />
 </head>
 <body>
 
@@ -22,7 +21,13 @@
     <div class="shape shape-3"></div>
 
     <div>
-      <div class="brand"><h1>Portal de Acesso</h1></div>
+      <div class="brand">
+        <h1>Portal de Acesso</h1>
+        <div class="img_Brand">
+          <img src="~/imgs/Senai.png">
+        </div>
+        
+      </div>
 
       <div class="benefits">
         <h3 class="benefits-title">Benefícios da Plataforma</h3>
@@ -69,85 +74,195 @@
       </div>
     </div>
 
-@* 
-    <div class="left-footer">© 2026 Todos os direitos reservados.</div> *@
-
-
+    <div class="left-footer">© 2026 Todos os direitos reservados.</div>
   </div>
 
   <div class="divider"></div>
+
   <!-- RIGHT PANEL -->
   <div class="right">
-    <!-- Tabs -->
-    <div class="Logo_Senai">
-    <img src="~/imgs/Senai.png">
-    </div>
-    <div class="tabs" role="tablist">
-      <a href="#" class="tab-link active" id="tab-login" role="tab" aria-selected="true">Login</a>
-      <a href="#" class="tab-link" id="tab-cadastro" role="tab" aria-selected="false">Cadastro</a>
-    </div>
+    <div class="right-inner">
 
-    <!-- LOGIN FORM -->
+      <div class="img_login">
+        <img src="~/imgs/SIR.png" alt="SIR">
+      </div>
 
-      <form id="login-form"
-      asp-controller="Login"
-      asp-action="Login"
-      method="post">
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab-link active" id="tab-login">Login</button>
+        <button class="tab-link" id="tab-cadastro">Cadastro</button>
+      </div>
 
-    <div class="field">
-        <label for="login-email">Email</label>
-        <div class="input-wrap">
-            <input type="email"
-                   id="login-email"
-                   name="email"
-                   placeholder="seu@email.com"
-                   autocomplete="email"
-                   required />
+      <!-- LOGIN FORM -->
+      <div class="form-panel active" id="panel-login">
+
+        <div class="form-header">
+          <h2>Bem-vindo</h2>
+          <p><span class="dot"></span> Entre com suas credenciais para continuar</p>
         </div>
-    </div>
 
-    <div class="field">
-        <label for="login-senha">Senha</label>
-        <div class="input-wrap">
-            <input type="password"
-                   id="login-senha"
-                   name="senha"
-                   placeholder="••••••••"
-                   autocomplete="current-password"
-                   required />
+        <form id="login-form"
+              asp-controller="Login"
+              asp-action="Login"
+              method="post">
+
+          <div class="field">
+            <label for="login-email">Email</label>
+            <div class="input-wrap">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" stroke="none"/><path d="M22 6 12 13 2 6"/><path d="M2 6h20v12H2z"/></svg>
+              <input type="email"
+                     id="login-email"
+                     name="email"
+                     placeholder="seu@email.com"
+                     autocomplete="email"
+                     required />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="login-senha">Senha</label>
+            <div class="input-wrap">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <input type="password"
+                     id="login-senha"
+                     name="senha"
+                     placeholder="••••••••"
+                     autocomplete="current-password"
+                     required />
+            </div>
+          </div>
+
+          <div class="row">
+            <label class="checkbox-label">
+              <input type="checkbox" id="lembrar" name="lembrar" />
+              Lembrar-me
+            </label>
+
+            <a href="#" class="forgot">Esqueceu a senha?</a>
+          </div>
+
+          @if (ViewBag.Erro != null)
+          {
+              <p style="color:red">@ViewBag.Erro</p>
+          }
+
+          <button type="submit" class="btn-submit" id="btn-login">
+            Entrar
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+
+          <p class="form-footer">
+            Não tem uma conta?
+            <a href="#" id="goto-cadastro">Cadastre-se</a>
+          </p>
+
+        </form>
+      </div>
+
+      <!-- CADASTRO FORM -->
+      <div class="form-panel" id="panel-cadastro">
+
+        <div class="form-header">
+          <h2>Crie sua conta</h2>
+          <p><span class="dot"></span> Preencha os dados para começar</p>
         </div>
-    </div>
 
-    <div class="row">
-        <label class="checkbox-label">
-            <input type="checkbox" id="lembrar" />
-            <span class="checkbox-box"></span>
-            Lembrar-me
-        </label>
+        <form id="cadastro-form"
+              asp-controller="Login"
+              asp-action="Cadastro"
+              method="post">
 
-        <a href="#" class="forgot">Esqueceu a senha?</a>
-    </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="cad-nome">Nome</label>
+              <div class="input-wrap">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <input type="text"
+                       id="cad-nome"
+                       name="nome"
+                       placeholder="Seu nome"
+                       autocomplete="given-name"
+                       required />
+              </div>
+            </div>
 
-    @if (ViewBag.Erro != null)
-    {
-        <p style="color:red">@ViewBag.Erro</p>
-    }
+            <div class="field">
+              <label for="cad-sobrenome">Sobrenome</label>
+              <div class="input-wrap">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <input type="text"
+                       id="cad-sobrenome"
+                       name="sobrenome"
+                       placeholder="Sobrenome"
+                       autocomplete="family-name"
+                       required />
+              </div>
+            </div>
+          </div>
 
-    <button type="submit" class="btn-submit" id="btn-login">
-        Entrar
-    </button>
+          <div class="field">
+            <label for="cad-email">Email</label>
+            <div class="input-wrap">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" stroke="none"/><path d="M22 6 12 13 2 6"/><path d="M2 6h20v12H2z"/></svg>
+              <input type="email"
+                     id="cad-email"
+                     name="email"
+                     placeholder="seu@email.com"
+                     autocomplete="email"
+                     required />
+            </div>
+          </div>
 
-    <p class="form-footer">
-        Não tem uma conta?
-        <a href="#">Cadastre-se</a>
-    </p>
+          <div class="field">
+            <label for="cad-senha">Senha</label>
+            <div class="input-wrap">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <input type="password"
+                     id="cad-senha"
+                     name="senha"
+                     placeholder="••••••••"
+                     autocomplete="new-password"
+                     required />
+            </div>
+          </div>
 
-</form>
+          <div class="field">
+            <label for="cad-confirmar">Confirmar senha</label>
+            <div class="input-wrap">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <input type="password"
+                     id="cad-confirmar"
+                     name="confirmarSenha"
+                     placeholder="••••••••"
+                     autocomplete="new-password"
+                     required />
+            </div>
+          </div>
+
+          @if (ViewBag.ErroCadastro != null)
+          {
+              <p style="color:red">@ViewBag.ErroCadastro</p>
+          }
+
+          <button type="submit" class="btn-submit" id="btn-cadastro">
+            Criar conta
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+
+          <p class="form-footer">
+            Já tem uma conta?
+            <a href="#" id="goto-login">Entrar</a>
+          </p>
+
+        </form>
+      </div>
+
     </div>
   </div>
 </div>
 
 <div class="help-btn" title="Ajuda">?</div>
+<script src="~/js/login.js"></script>
 
 </body>
 </html>

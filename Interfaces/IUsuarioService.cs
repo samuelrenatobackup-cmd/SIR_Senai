@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using SIR.Models;
 
-namespace SIR.Interfaces
+public interface IUsuarioService
 {
-    public interface IUsuarioService
-    {
-        
-    }
+    Task<Usuario> CadastrarAsync(Usuario usuario);
 }
