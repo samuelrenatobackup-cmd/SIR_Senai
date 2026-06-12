@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIR.Models
 {
@@ -15,7 +16,33 @@ namespace SIR.Models
         [Required]
         public int QuantidadeDisponivel { get; set; }
 
-        // Relacionamento
         public ICollection<Reserva>? Reservas { get; set; }
+
+        [NotMapped]
+        public int QuantidadeEmprestada
+        {
+            get
+            {
+                return QuantidadeTotal - QuantidadeDisponivel;
+            }
+        }
+
+        [NotMapped]
+        public string Status
+        {
+            get
+            {
+                if (QuantidadeTotal == 0)
+                    return "Indisponível";
+
+                if (QuantidadeDisponivel == 0)
+                    return "Em Uso";
+
+                if (QuantidadeDisponivel < QuantidadeTotal)
+                    return "Parcial";
+
+                return "Disponível";
+            }
+        }
     }
 }

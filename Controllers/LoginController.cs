@@ -14,17 +14,19 @@ namespace SIR.Controllers
             _context = context;
         }
 
+        //  TELA LOGIN 
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
-        // ================= LOGIN =================
+        //  LOGIN 
         [HttpPost]
         public IActionResult Login(string email, string senha)
         {
-            var usuario = _context.Usuarios.FirstOrDefault(u => u.Email == email);
+            var usuario = _context.Usuarios
+                .FirstOrDefault(u => u.Email == email);
 
             if (usuario == null || !BCrypt.Net.BCrypt.Verify(senha, usuario.Senha))
             {
@@ -32,14 +34,26 @@ namespace SIR.Controllers
                 return View("Index");
             }
 
+            // ADMIN
+            if (usuario.TipoUsuario)
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
+            // USUÁRIO COMUM
             return RedirectToAction("Index", "Reserva");
         }
 
-        // ================= CADASTRO =================
+        // CADASTRO 
         [HttpPost]
-        public IActionResult Cadastro(string nome, string sobrenome, string email, string senha, string confirmarSenha)
+        public IActionResult Cadastro(
+            string nome,
+            string sobrenome,
+            string email,
+            string senha,
+            string confirmarSenha)
         {
-            // valida senha igual
+            
             if (senha != confirmarSenha)
             {
                 ViewBag.ErroCadastro = "As senhas não coincidem.";
@@ -58,6 +72,7 @@ namespace SIR.Controllers
             {
                 ViewBag.ErroCadastro =
                     "Senha fraca! Use no mínimo 8 caracteres, com maiúscula, minúscula, número e símbolo.";
+
                 return View("Index");
             }
 
@@ -67,17 +82,21 @@ namespace SIR.Controllers
                 Sobrenome = sobrenome,
                 Email = email,
                 Senha = BCrypt.Net.BCrypt.HashPassword(senha),
-                TipoUsuario = false
+
+                // false = usuário comum
+                // true = administrador
+                TipoUsuario = true
             };
 
             _context.Usuarios.Add(usuario);
             _context.SaveChanges();
 
             TempData["Sucesso"] = "Cadastro realizado com sucesso!";
+
             return RedirectToAction("Index");
         }
 
-        // ================= VALIDA SENHA =================
+        // VALIDA SENHA 
         private bool SenhaForte(string senha)
         {
             if (string.IsNullOrWhiteSpace(senha))

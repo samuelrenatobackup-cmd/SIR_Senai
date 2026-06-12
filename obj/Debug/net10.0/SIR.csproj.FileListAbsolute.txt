@@ -128,7 +128,6 @@ C:\Users\54157995830\Documents\SIR\obj\Debug\net10.0\scopedcss\Views\Shared\_Lay
 C:\Users\54157995830\Documents\SIR\obj\Debug\net10.0\scopedcss\bundle\SIR.styles.css
 C:\Users\54157995830\Documents\SIR\obj\Debug\net10.0\scopedcss\projectbundle\SIR.bundle.scp.css
 C:\Users\54157995830\Documents\SIR\obj\Debug\net10.0\compressed\h4z0z9zl4h-{0}-zrrdlznttc-zrrdlznttc.gz
-C:\Users\54157995830\Documents\SIR\obj\Debug\net10.0\compressed\4p095k17zp-{0}-zlsr2959ke-zlsr2959ke.gz
 C:\Users\54157995830\Documents\SIR\obj\Debug\net10.0\compressed\fda7ap2eo1-{0}-1pc3obbgk3-1pc3obbgk3.gz
 C:\Users\54157995830\Documents\SIR\obj\Debug\net10.0\compressed\i0276hvnzi-{0}-61n19gt1b8-61n19gt1b8.gz
 C:\Users\54157995830\Documents\SIR\obj\Debug\net10.0\compressed\jalcpe223o-{0}-47otxtyo56-47otxtyo56.gz
@@ -165,3 +164,5 @@ C:\Users\54157995830\Documents\SIR\obj\Debug\net10.0\ref\SIR.dll
 C:\Users\54157995830\Documents\SIR\obj\Debug\net10.0\compressed\1y627s03ni-{0}-namfrc7xtf-namfrc7xtf.gz
 C:\Users\54157995830\Documents\SIR\obj\Debug\net10.0\compressed\s6ale7mir6-{0}-yft7w2a03b-yft7w2a03b.gz
 C:\Users\54157995830\Documents\SIR\bin\Debug\net10.0\BCrypt-Net-Next.dll
+C:\Users\54157995830\Documents\SIR\obj\Debug\net10.0\compressed\w8mcs26yr2-{0}-fyytam5fgm-fyytam5fgm.gz
+C:\Users\54157995830\Documents\SIR\obj\Debug\net10.0\compressed\4p095k17zp-{0}-zlsr2959ke-zlsr2959ke.gz
