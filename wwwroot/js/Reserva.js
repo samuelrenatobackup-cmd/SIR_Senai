@@ -1,61 +1,57 @@
+document.addEventListener("DOMContentLoaded", () => {
 
-            const searchInput = document.getElementById("search");
-            const filterButtons = document.querySelectorAll(".filter-btn");
-            const cards = document.querySelectorAll(".card");
-            const semResultados = document.getElementById("semResultados");
+    const searchInput = document.getElementById("search");
+    const filterButtons = document.querySelectorAll(".botao-filtro");
+    const cards = document.querySelectorAll(".card");
+    const semResultados = document.getElementById("semResultados");
 
-            let filtroAtual = "todos";
+    console.log("Reserva.js carregado");
+    console.log("Cards encontrados:", cards.length);
+    console.log("Botões de filtro encontrados:", filterButtons.length);
 
-            function filtrarEquipamentos() {
+    let filtroAtual = "todos";
 
-                const busca = searchInput.value.toLowerCase();
-                let quantidadeVisivel = 0;
+    function filtrarEquipamentos() {
+        const busca = searchInput.value.toLowerCase();
+        let quantidadeVisivel = 0;
 
-                cards.forEach(card => {
+        cards.forEach(card => {
+            const h3 = card.querySelector("h3");
+            const nome = h3 ? h3.textContent.toLowerCase() : "";
+            const status = card.dataset.status;
 
-                    const nome = card.querySelector("h3").textContent.toLowerCase();
-                    const status = card.dataset.status;
+            const correspondeBusca = nome.includes(busca);
+            const correspondeFiltro =
+                filtroAtual === "todos" || status === filtroAtual;
 
-                    const correspondeBusca =
-                        nome.includes(busca);
-
-                    const correspondeFiltro =
-                        filtroAtual === "todos" ||
-                        status === filtroAtual;
-
-                    if (correspondeBusca && correspondeFiltro) {
-                        card.style.display = "";
-                        quantidadeVisivel++;
-                    }
-                    else {
-                        card.style.display = "none";
-                    }
-
-                });
-
-                if (quantidadeVisivel === 0) {
-                    semResultados.style.display = "block";
-                } else {
-                    semResultados.style.display = "none";
-                }
+            if (correspondeBusca && correspondeFiltro) {
+                card.style.display = "";
+                quantidadeVisivel++;
+            } else {
+                card.style.display = "none";
             }
+        });
 
-            searchInput.addEventListener("input", filtrarEquipamentos);
+        if (semResultados) {
+            semResultados.style.display =
+                quantidadeVisivel === 0 ? "block" : "none";
+        }
+    }
 
-            filterButtons.forEach(btn => {
+    if (searchInput) {
+        searchInput.addEventListener("input", filtrarEquipamentos);
+    }
 
-                btn.addEventListener("click", () => {
+    filterButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            console.log("Clicou no filtro:", btn.dataset.filter);
 
-                    filterButtons.forEach(b =>
-                        b.classList.remove("active")
-                    );
+            filterButtons.forEach(b => b.classList.remove("ativo"));
+            btn.classList.add("ativo");
 
-                    btn.classList.add("active");
+            filtroAtual = btn.dataset.filter;
+            filtrarEquipamentos();
+        });
+    });
 
-                    filtroAtual = btn.dataset.filter;
-
-                    filtrarEquipamentos();
-
-                });
-
-            });
+});
