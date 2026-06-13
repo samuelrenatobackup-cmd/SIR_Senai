@@ -34,10 +34,10 @@ body{
 }
 
 /* ========================================
-   LEFT
+   PAINEL ESQUERDO
 ======================================== */
 
-.left{
+.lado-esquerdo{
     flex:1;
     padding:80px;
 
@@ -57,7 +57,7 @@ body{
         #0c0c0c;
 }
 
-.left::before{
+.lado-esquerdo::before{
     content:"";
 
     position:absolute;
@@ -71,7 +71,6 @@ body{
 
     pointer-events:none;
 }
-
 
 .shape{
     position:absolute;
@@ -115,14 +114,12 @@ body{
     margin-bottom:20px;
 }
 
-
-
-.brand img{
-    width: 350px;
-    height: auto;
+.imgMarca img{
+    width:350px;
+    height:auto;
 }
 
-/*BENEFITS*/
+/* BENEFÍCIOS */
 
 .benefits{
     margin-top:60px;
@@ -169,7 +166,7 @@ body{
     line-height:1.7;
 }
 
-.left-footer{
+.rodape-esquerdo{
     margin-top:40px;
     padding-top:40px;
 
@@ -178,19 +175,19 @@ body{
     color:var(--text-muted);
 }
 
-/*DIVIDER*/
+/* DIVIDER */
 
 .divider{
     width:1px;
     background:rgba(255,255,255,.08);
 }
 
-/*RIGHT*/
+/* PAINEL DIREITO */
 
-.right {
-    width: 42%;
-    padding: 50px 60px;
-    overflow: hidden;
+.lado-direito{
+    width:42%;
+    padding:50px 60px;
+    overflow:hidden;
 
     display:flex;
     flex-direction:column;
@@ -206,30 +203,29 @@ body{
     ),
     #090909;
 }
-.right-inner {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-}
 
-.img_login{
-    width: 100%;
-    height: 100px;
-    padding-bottom: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
+.conteudo-direito{
     position:relative;
     z-index:2;
+    width:100%;
 }
 
-.img_login img{
-    height: 150px;
-    width: auto;
+.imgLogin{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    margin-bottom:20px;  
+    position:relative;
 }
 
-.right::before{
+.imgLogin img{
+    height:150px;
+    width:auto;
+}
+
+.lado-direito::before{
     content:"";
 
     position:absolute;
@@ -249,8 +245,7 @@ body{
 
     pointer-events:none;
 }
-
-/*TABS*/
+/* TABS */
 
 .tabs{
     display:flex;
@@ -295,20 +290,20 @@ body{
     color:white;
 }
 
-/*HEADER*/
+/* CABEÇALHO FORM */
 
-.form-header{
+.cabecalho-form{
     margin-bottom:30px;
     position:relative;
     z-index:2;
 }
 
-.form-header h2{
+.cabecalho-form h2{
     font-size:40px;
     margin-bottom:10px;
 }
 
-.form-header p{
+.cabecalho-form p{
     color:var(--text-muted);
 }
 
@@ -322,18 +317,20 @@ body{
     border-radius:50%;
 }
 
-/*FORM*/
+/* FORMULÁRIOS */
 
 .field{
     margin-bottom:18px;
     position:relative;
     z-index:2;
 }
-.field-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+
+.field-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
 }
+
 .field label{
     display:block;
     margin-bottom:8px;
@@ -408,7 +405,7 @@ body{
     width:auto;
 }
 
-.forgot{
+.esqueceu-senha{
     color:var(--red);
     font-size:14px;
 }
@@ -458,9 +455,15 @@ body{
     0 10px 25px rgba(229,57,53,.35);
 }
 
-/*FOOTER*/
+/* RODAPÉ DOS FORMULÁRIOS */
 
-.form-footer{
+.rodape-form{
+    text-align:center;
+    margin-top:20px;
+}
+/* RODAPÉ DO FORMULÁRIO */
+
+.rodape-form{
     margin-top:20px;
 
     text-align:center;
@@ -472,13 +475,15 @@ body{
     z-index:2;
 }
 
-.form-footer a{
+.rodape-form a{
     color:var(--red);
     font-weight:600;
     text-decoration:none;
 }
 
-.help-btn{
+/* BOTÃO DE AJUDA */
+
+.btn-ajuda{
     position:fixed;
 
     bottom:20px;
@@ -501,11 +506,11 @@ body{
     color:white;
 }
 
-/*RESPONSIVO*/
+/* RESPONSIVO */
 
 @media(max-width:1100px){
 
-    .left{
+    .lado-esquerdo{
         display:none;
     }
 
@@ -513,7 +518,7 @@ body{
         display:none;
     }
 
-    .right{
+    .lado-direito{
         width:100%;
         max-width:600px;
         margin:auto;
@@ -530,11 +535,11 @@ body{
         overflow-y:auto;
     }
 
-    .right{
+    .lado-direito{
         padding:25px;
     }
 
-    .form-header h2{
+    .cabecalho-form h2{
         font-size:32px;
     }
 
@@ -549,12 +554,25 @@ body{
     }
 }
 
+/* ANIMAÇÃO DOS PAINÉIS */
 
+.form-panel{
+    display:none;
+    animation:fadeSlide .3s ease forwards;
+}
 
-.form-panel { display: none; animation: fadeSlide .3s ease forwards; }
-.form-panel.active { display: block; }
+.form-panel.active{
+    display:block;
+}
 
-@keyframes fadeSlide {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
+@keyframes fadeSlide{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }

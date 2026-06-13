@@ -1,74 +1,90 @@
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using SIR.Contexts;
 using SIR.Models;
-using System.Linq;
 
 namespace SIR.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ContextoBancoDados _context;
 
-        public LoginController(ApplicationDbContext context)
+        public LoginController(ContextoBancoDados context)
         {
             _context = context;
         }
 
-        //  TELA LOGIN 
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
-        //  LOGIN 
         [HttpPost]
-        public IActionResult Login(string email, string senha)
+        public async Task<IActionResult> AutenticarUsuario(string email, string senha)
         {
-            var usuario = _context.Usuarios
-                .FirstOrDefault(u => u.Email == email);
+            var usuario = await _context.Usuarios
+                .FirstOrDefaultAsync(u => u.Email == email);
 
-            if (usuario == null || !BCrypt.Net.BCrypt.Verify(senha, usuario.Senha))
+            if (usuario == null || 
+                !BCrypt.Net.BCrypt.Verify(senha, usuario.Senha))
             {
                 ViewBag.Erro = "Email ou senha inválidos";
                 return View("Index");
             }
 
-            // ADMIN
-            if (usuario.TipoUsuario)
+            var claims = new List<Claim>
             {
-                return RedirectToAction("Index", "Admin");
-            }
+                new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
+                new Claim(ClaimTypes.Name, usuario.Nome),
+                new Claim(ClaimTypes.Email, usuario.Email),
+                new Claim(ClaimTypes.Role, usuario.TipoUsuario ? "Admin" : "Usuario")
+            };
 
-            // USUÁRIO COMUM
-            return RedirectToAction("Index", "Reserva");
+            var identidade = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            var principal = new ClaimsPrincipal(identidade);
+
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                principal,
+                new AuthenticationProperties
+                {
+                    IsPersistent = true,
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30)
+                });
+
+            if (usuario.TipoUsuario)
+                return RedirectToAction("Index", "Admin");
+
+            return RedirectToAction("ListarEquipamentos", "Reserva");
         }
 
-        // CADASTRO 
         [HttpPost]
-        public IActionResult Cadastro(
+        [ValidateAntiForgeryToken]
+        public IActionResult CadastrarUsuario(
             string nome,
             string sobrenome,
             string email,
             string senha,
             string confirmarSenha)
         {
-            
             if (senha != confirmarSenha)
             {
                 ViewBag.ErroCadastro = "As senhas não coincidem.";
                 return View("Index");
             }
 
-            // email já existe
             if (_context.Usuarios.Any(u => u.Email == email))
             {
                 ViewBag.ErroCadastro = "Este email já está cadastrado.";
                 return View("Index");
             }
 
-            // senha forte
-            if (!SenhaForte(senha))
+            if (!ValidarForcaSenha(senha))
             {
                 ViewBag.ErroCadastro =
                     "Senha fraca! Use no mínimo 8 caracteres, com maiúscula, minúscula, número e símbolo.";
@@ -82,10 +98,7 @@ namespace SIR.Controllers
                 Sobrenome = sobrenome,
                 Email = email,
                 Senha = BCrypt.Net.BCrypt.HashPassword(senha),
-
-                // false = usuário comum
-                // true = administrador
-                TipoUsuario = true
+                TipoUsuario = false
             };
 
             _context.Usuarios.Add(usuario);
@@ -93,24 +106,25 @@ namespace SIR.Controllers
 
             TempData["Sucesso"] = "Cadastro realizado com sucesso!";
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
-        // VALIDA SENHA 
-        private bool SenhaForte(string senha)
+        [HttpGet]
+        public async Task<IActionResult> Logout()
         {
-            if (string.IsNullOrWhiteSpace(senha))
-                return false;
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction(nameof(Index));
+        }
 
-            if (senha.Length < 8)
-                return false;
+        private bool ValidarForcaSenha(string senha)
+        {
+            if (string.IsNullOrWhiteSpace(senha)) return false;
+            if (senha.Length < 8) return false;
 
-            bool maiuscula = senha.Any(char.IsUpper);
-            bool minuscula = senha.Any(char.IsLower);
-            bool numero = senha.Any(char.IsDigit);
-            bool especial = senha.Any(c => !char.IsLetterOrDigit(c));
-
-            return maiuscula && minuscula && numero && especial;
+            return senha.Any(char.IsUpper) &&
+                   senha.Any(char.IsLower) &&
+                   senha.Any(char.IsDigit) &&
+                   senha.Any(c => !char.IsLetterOrDigit(c));
         }
     }
 }

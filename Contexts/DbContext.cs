@@ -3,26 +3,32 @@ using SIR.Models;
 
 namespace SIR.Contexts
 {
-    public class ApplicationDbContext : DbContext
+    public class ContextoBancoDados : DbContext
     {
-        public ApplicationDbContext
-        (
-            DbContextOptions<ApplicationDbContext> options
-        ) : base(options)
+        public ContextoBancoDados(
+            DbContextOptions<ContextoBancoDados> opcoes)
+            : base(opcoes)
         {
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
+
         public DbSet<Equipamento> Equipamentos { get; set; }
+
         public DbSet<Reserva> Reservas { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder construtorModelo)
         {
-            modelBuilder.Entity<Usuario>().ToTable("Usuario");
-            modelBuilder.Entity<Equipamento>().ToTable("Equipamento");
-            modelBuilder.Entity<Reserva>().ToTable("Reserva");
+            construtorModelo.Entity<Usuario>()
+                .ToTable("Usuarios");
 
-            base.OnModelCreating(modelBuilder);
+            construtorModelo.Entity<Equipamento>()
+                .ToTable("Equipamentos");
+
+            construtorModelo.Entity<Reserva>()
+                .ToTable("Reservas");
+
+            base.OnModelCreating(construtorModelo);
         }
     }
 }

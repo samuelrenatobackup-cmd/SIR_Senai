@@ -1,4 +1,4 @@
-using SIR.Models;
+
 
 public interface IUsuarioService
 {

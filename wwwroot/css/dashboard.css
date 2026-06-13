@@ -1,5 +1,5 @@
 
-/* ── TOP NAV ── */
+/* ── BARRA SUPERIOR ── */
 .navbar {
   display: flex;
   align-items: center;
@@ -13,13 +13,14 @@
   z-index: 100;
 }
 
-.navbar-brand {
+/* MARCA */
+.marca-navbar {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.brand-icon {
+.marca-icone {
   width: 38px;
   height: 38px;
   background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
@@ -31,17 +32,19 @@
   flex-shrink: 0;
 }
 
-.brand-icon svg { width: 20px; height: 20px; color: #fff; }
+.marca-icone svg { width: 20px; height: 20px; color: #fff; }
 
-.brand-text h1 { font-size: 16px; font-weight: 700; }
-.brand-text p   { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+.marca-texto h1 { font-size: 16px; font-weight: 700; }
+.marca-texto p   { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
 
-.navbar-right {
+/* LADO DIREITO DA NAV */
+.navbar-direita {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
+/* STATUS ONLINE */
 .status-badge {
   display: flex;
   align-items: center;
@@ -63,6 +66,7 @@
   animation: blink 2s ease-in-out infinite;
 }
 
+/* BOTÃO ÍCONE */
 .icon-btn {
   width: 36px;
   height: 36px;
@@ -98,7 +102,8 @@
   border: 2px solid var(--bg2);
 }
 
-.admin-btn {
+/* BOTÃO ADMIN */
+.botao-admin {
   display: flex;
   align-items: center;
   gap: 7px;
@@ -114,25 +119,32 @@
   text-decoration: none;
 }
 
-.admin-btn svg { width: 16px; height: 16px; color: var(--text-muted); }
-.admin-btn:hover { border-color: var(--red); }
+.botao-admin svg {
+  width: 16px;
+  height: 16px;
+  color: var(--text-muted);
+}
 
-/* ── CONTENT ── */
-.content {
+.botao-admin:hover {
+  border-color: var(--red);
+}
+
+/* ── CONTEÚDO ── */
+.conteudo {
   max-width: 1200px;
   margin: 0 auto;
   padding: 28px 28px 80px;
 }
 
-/* ── ROW ── */
-.stats {
+/* ── ESTATÍSTICAS ── */
+.estatisticas {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 14px;
   margin-bottom: 28px;
 }
 
-.stat-card {
+.card-estatistica {
   background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 14px;
@@ -143,12 +155,12 @@
   transition: var(--transition);
 }
 
-.stat-card:hover {
+.card-estatistica:hover {
   border-color: rgba(224,48,48,0.2);
   transform: translateY(-1px);
 }
 
-.stat-icon {
+.icone-estatistica {
   width: 40px;
   height: 40px;
   border-radius: 10px;
@@ -158,14 +170,14 @@
   flex-shrink: 0;
 }
 
-.stat-icon svg { width: 20px; height: 20px; }
+.icone-estatistica svg { width: 20px; height: 20px; }
 
-.stat-icon.total   { background: rgba(255,255,255,0.06); color: var(--text-muted); }
-.stat-icon.disp    { background: rgba(34,197,94,0.12); color: var(--green); }
-.stat-icon.uso     { background: rgba(245,158,11,0.12); color: var(--yellow); }
-.stat-icon.indisp  { background: rgba(224,48,48,0.12); color: var(--red); }
+.icone-estatistica.total { background: rgba(255,255,255,0.06); color: var(--text-muted); }
+.icone-estatistica.disponivel { background: rgba(34,197,94,0.12); color: var(--green); }
+.icone-estatistica.uso { background: rgba(245,158,11,0.12); color: var(--yellow); }
+.icone-estatistica.indisponivel { background: rgba(224,48,48,0.12); color: var(--red); }
 
-.stat-info label {
+.info-estatistica label {
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.8px;
@@ -173,32 +185,31 @@
   color: var(--text-muted);
 }
 
-.stat-info .num {
+.info-estatistica .numero {
   font-size: 30px;
   font-weight: 700;
   line-height: 1.1;
   margin-top: 4px;
 }
 
-/* number colors */
-.stat-card:nth-child(2) .num { color: var(--green); }
-.stat-card:nth-child(3) .num { color: var(--yellow); }
-.stat-card:nth-child(4) .num { color: var(--red); }
-
-/* ── TOOLBAR ── */
-.toolbar {
+/* CORES DOS NÚMEROS */
+.card-estatistica:nth-child(2) .numero { color: var(--green); }
+.card-estatistica:nth-child(3) .numero { color: var(--yellow); }
+.card-estatistica:nth-child(4) .numero { color: var(--red); }
+/* ── BARRA DE FERRAMENTAS ── */
+.barra-ferramentas {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 24px;
 }
 
-.search-wrap {
+.area-pesquisa {
   flex: 1;
   position: relative;
 }
 
-.search-wrap svg {
+.area-pesquisa svg {
   position: absolute;
   left: 14px;
   top: 50%;
@@ -209,7 +220,7 @@
   pointer-events: none;
 }
 
-.search-input {
+.input-pesquisa {
   width: 100%;
   background: var(--bg2);
   border: 1px solid var(--border);
@@ -222,12 +233,19 @@
   transition: border-color var(--transition), box-shadow var(--transition);
 }
 
-.search-input::placeholder { color: var(--text-dim); }
-.search-input:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(224,48,48,0.10); }
+.input-pesquisa::placeholder { color: var(--text-dim); }
+.input-pesquisa:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(224,48,48,0.10);
+}
 
-.filter-btns { display: flex; gap: 8px; }
+/* BOTÕES DE FILTRO */
+.botoes-filtro {
+  display: flex;
+  gap: 8px;
+}
 
-.filter-btn {
+.botao-filtro {
   padding: 10px 16px;
   border: 1px solid var(--border);
   border-radius: 10px;
@@ -241,22 +259,26 @@
   white-space: nowrap;
 }
 
-.filter-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.15); }
+.botao-filtro:hover {
+  color: var(--text);
+  border-color: rgba(255,255,255,0.15);
+}
 
-.filter-btn.active {
+.botao-filtro.ativo {
   background: var(--red);
   color: #fff;
   border-color: var(--red);
   box-shadow: 0 2px 12px rgba(224,48,48,0.30);
 }
 
-/* ── GRID ── */
+/* ── GRID ── (mantido padrão técnico) */
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
 }
 
+/* CARD (mantido padrão) */
 .card {
   background: var(--bg2);
   border: 1px solid var(--border);
@@ -277,8 +299,8 @@
   border-radius: 14px 14px 0 0;
 }
 
-.card.disponivel::before  { background: var(--green); }
-.card.em-uso::before      { background: var(--yellow); }
+.card.disponivel::before { background: var(--green); }
+.card.em-uso::before { background: var(--yellow); }
 .card.indisponivel::before { background: var(--red); }
 
 .card:hover {
@@ -287,6 +309,7 @@
   box-shadow: 0 8px 32px rgba(0,0,0,0.3);
 }
 
+/* TOPO DO CARD */
 .card-top {
   display: flex;
   align-items: flex-start;
@@ -328,6 +351,7 @@
   text-overflow: ellipsis;
 }
 
+/* LINHA DO CARD */
 .card-row {
   display: flex;
   align-items: center;
@@ -335,7 +359,12 @@
   margin-bottom: 14px;
 }
 
-.card-qty { font-size: 12px; color: var(--text-muted); text-align: right; }
+.card-qty {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: right;
+}
+
 .card-qty strong {
   display: block;
   font-size: 20px;
@@ -344,6 +373,7 @@
   line-height: 1;
 }
 
+/* BOTÃO EMPRESTAR (mantido padrão UI) */
 .btn-emprestar {
   width: 100%;
   padding: 10px;
@@ -377,10 +407,12 @@
   cursor: not-allowed;
 }
 
-.btn-emprestar svg { width: 16px; height: 16px; }
-
-/* ── FOOTER ── */
-.footer {
+.btn-emprestar svg {
+  width: 16px;
+  height: 16px;
+}
+/* ── RODAPÉ ── */
+.rodape {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -397,13 +429,13 @@
   z-index: 90;
 }
 
-.footer-brand {
+.rodape-marca {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.footer-icon {
+.rodape-icone {
   width: 28px;
   height: 28px;
   background: var(--red);
@@ -413,52 +445,57 @@
   justify-content: center;
 }
 
-.footer-icon svg { width: 15px; height: 15px; color: #fff; }
+.rodape-icone svg {
+  width: 15px;
+  height: 15px;
+  color: #fff;
+}
 
-.footer-brand-text strong {
+.rodape-texto strong {
   display: block;
   font-size: 12px;
   font-weight: 600;
   color: var(--text);
 }
 
-.footer-brand-text span {
+.rodape-texto span {
   font-size: 11px;
   color: var(--text-muted);
 }
 
-.footer-right {
+.rodape-direita {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.footer-right .version {
+.rodape-direita .versao {
   color: var(--text-dim);
 }
 
-.dashboard-page .help-btn {
+/* AJUSTE DO BOTÃO DE AJUDA */
+.dashboard-page .botao-ajuda {
   bottom: 66px;
 }
 
-/* ── RESPONSIVE ── */
+/* ── RESPONSIVIDADE ── */
 @media (max-width: 1100px) {
   .grid { grid-template-columns: repeat(3, 1fr); }
-  .stats { grid-template-columns: repeat(2, 1fr); }
+  .estatisticas { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 700px) {
   .grid { grid-template-columns: repeat(2, 1fr); }
-  .filter-btns { flex-wrap: wrap; }
-  .toolbar { flex-direction: column; align-items: stretch; }
+  .botoes-filtro { flex-wrap: wrap; }
+  .barra-ferramentas { flex-direction: column; align-items: stretch; }
   .navbar { padding: 0 16px; }
-  .content { padding: 20px 16px 80px; }
-  .footer { padding: 0 16px; }
-  .navbar-brand .brand-text p { display: none; }
+  .conteudo { padding: 20px 16px 80px; }
+  .rodape { padding: 0 16px; }
+  .marca-texto p { display: none; }
 }
 
 @media (max-width: 480px) {
   .grid { grid-template-columns: 1fr; }
-  .stats { grid-template-columns: 1fr; }
+  .estatisticas { grid-template-columns: 1fr; }
   .status-badge { display: none; }
 }

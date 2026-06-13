@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 public class UsuarioService : IUsuarioService
 {
-    private readonly ApplicationDbContext  _context;
+    private readonly ContextoBancoDados _context;
 
-    public UsuarioService(ApplicationDbContext  context)
+    public UsuarioService(ContextoBancoDados  context)
     {
         _context = context;
     }

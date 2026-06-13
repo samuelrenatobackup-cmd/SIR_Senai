@@ -1,12 +1,33 @@
+function switchTab(tab) {
+  const abaLogin = document.getElementById('aba-login');
+  const abaCadastro = document.getElementById('aba-cadastro');
+  const painelLogin = document.getElementById('painel-login');
+  const painelCadastro = document.getElementById('painel-cadastro');
 
-function switchTab(target) {
-  document.querySelectorAll('.tab-link').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('tab-' + target).classList.add('active');
-  document.getElementById('panel-' + target).classList.add('active');
+  if (tab === 'cadastro') {
+    abaLogin.classList.remove('active');
+    abaCadastro.classList.add('active');
+
+    painelLogin.classList.remove('active');
+    painelCadastro.classList.add('active');
+  } else {
+    abaCadastro.classList.remove('active');
+    abaLogin.classList.add('active');
+
+    painelCadastro.classList.remove('active');
+    painelLogin.classList.add('active');
+  }
 }
 
-document.getElementById('tab-login').addEventListener('click', () => switchTab('login'));
-document.getElementById('tab-cadastro').addEventListener('click', () => switchTab('cadastro'));
-document.getElementById('goto-cadastro').addEventListener('click', e => { e.preventDefault(); switchTab('cadastro'); });
-document.getElementById('goto-login').addEventListener('click', e => { e.preventDefault(); switchTab('login'); });
+document.getElementById('aba-login').addEventListener('click', () => switchTab('login'));
+document.getElementById('aba-cadastro').addEventListener('click', () => switchTab('cadastro'));
+
+document.getElementById('ir-cadastro').addEventListener('click', e => {
+  e.preventDefault();
+  switchTab('cadastro');
+});
+
+document.getElementById('ir-login').addEventListener('click', e => {
+  e.preventDefault();
+  switchTab('login');
+});

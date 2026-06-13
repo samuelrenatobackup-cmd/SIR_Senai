@@ -6,40 +6,37 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sistema de Reservas — Monitoramento de Equipamentos</title>
-    <meta name="description"
-        content="Gerencie e monitore equipamentos disponíveis para empréstimo na sua instituição." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet" />
+    <title>Sistema de Reservas</title>
+
     <link rel="stylesheet" href="~/css/style.css">
     <link rel="stylesheet" href="~/css/dashboard.css" />
 </head>
 
 <body class="dashboard-page">
 
-    <!-- NAV -->
+    <!-- NAVBAR -->
     <nav class="navbar">
 
-        <div class="navbar-brand">
-            <div class="brand-icon">
+        <div class="marca-navbar">
+
+            <div class="marca-icone">
                 <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <rect x="2" y="3" width="20" height="14" rx="2" />
                     <path d="M8 21h8M12 17v4" />
                 </svg>
             </div>
 
-            <div class="brand-text">
+            <div class="marca-texto">
                 <h1>Sistema de Reservas</h1>
                 <p>Monitoramento de Equipamentos</p>
             </div>
+
         </div>
 
-        <div class="navbar-right">
+        <div class="navbar-direita">
 
-            <a href="/MinhasReservas" class="reservas-btn">
-                Ver Reservas
+            <a href="/MinhasReservas" class="botao-admin">
+                Minhas Reservas
             </a>
 
             <div class="status-badge">
@@ -47,7 +44,7 @@
                 Online
             </div>
 
-            <a href="/Login" class="Sair_Btn">
+            <a href="/Login" class="botao-admin">
                 Sair
             </a>
 
@@ -55,15 +52,14 @@
 
     </nav>
 
-    <!-- CONTENT -->
+    <!-- CONTEÚDO -->
+    <div class="conteudo">
 
-    <div class="content">
+        <!-- ESTATÍSTICAS -->
+        <div class="estatisticas">
 
-        <!-- Stats -->
-        <div class="stats">
-
-            <div class="stat-card">
-                <div class="stat-icon total">
+            <div class="card-estatistica">
+                <div class="icone-estatistica total">
                     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <rect x="3" y="3" width="7" height="7" />
                         <rect x="14" y="3" width="7" height="7" />
@@ -72,99 +68,89 @@
                     </svg>
                 </div>
 
-                <div class="stat-info">
-                    <label>Total</label>
-                    <div class="num">@Model.Count()</div>
+                <div class="info-estatistica">
+                    <label>Total de Equipamentos</label>
+                    <div class="numero">@Model.Count()</div>
                 </div>
             </div>
 
-            <div class="stat-card">
-                <div class="stat-icon disp">
+            <div class="card-estatistica">
+                <div class="icone-estatistica disponivel">
                     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
                     </svg>
                 </div>
 
-                <div class="stat-info">
+                <div class="info-estatistica">
                     <label>Disponíveis</label>
-                    <div class="num">@Model.Count(e => e.QuantidadeDisponivel > 0)</div>
+                    <div class="numero">@Model.Count(e => e.QuantidadeDisponivel > 0)</div>
                 </div>
             </div>
 
-            <div class="stat-card">
-                <div class="stat-icon uso">
+            <div class="card-estatistica">
+                <div class="icone-estatistica uso">
                     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path
-                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                     </svg>
                 </div>
 
-                <div class="stat-info">
+                <div class="info-estatistica">
                     <label>Em Uso</label>
-                    <div class="num">
-                        @Model.Count(e =>
-                        e.QuantidadeDisponivel < e.QuantidadeTotal
-                        && e.QuantidadeDisponivel > 0)
+                    <div class="numero">
+                        @Model.Count(e => e.QuantidadeDisponivel < e.QuantidadeTotal && e.QuantidadeDisponivel > 0)
                     </div>
                 </div>
             </div>
 
-            <div class="stat-card">
-                <div class="stat-icon indisp">
+            <div class="card-estatistica">
+                <div class="icone-estatistica indisponivel">
                     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path
-                            d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                        d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
                         <line x1="12" y1="9" x2="12" y2="13" />
                         <line x1="12" y1="17" x2="12.01" y2="17" />
                     </svg>
                 </div>
 
-                <div class="stat-info">
+                <div class="info-estatistica">
                     <label>Indisponíveis</label>
-                    <div class="num">@Model.Count(e => e.QuantidadeDisponivel == 0)</div>
+                    <div class="numero">@Model.Count(e => e.QuantidadeDisponivel == 0)</div>
                 </div>
             </div>
 
         </div>
 
-        <!-- Toolbar -->
-        <div class="toolbar">
+        <!-- TOOLBAR -->
+        <div class="barra-ferramentas">
 
-            <div class="search-wrap">
+            <div class="area-pesquisa">
+
                 <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <circle cx="11" cy="11" r="8" />
                     <line x1="21" y1="21" x2="16.65" y2="16.65" />
                 </svg>
 
-                <input type="text" class="search-input" id="search" placeholder="Buscar equipamento..." />
+                <input type="text" class="input-pesquisa" id="search" placeholder="Buscar equipamento..." />
+
             </div>
 
-            <button class="filter-btn active" data-filter="todos">
-                Todos
-            </button>
+            <div class="botoes-filtro">
+                <button class="botao-filtro ativo" data-filter="todos">Todos</button>
+                <button class="botao-filtro" data-filter="disponivel">Disponíveis</button>
+                <button class="botao-filtro" data-filter="em-uso">Em uso</button>
+                <button class="botao-filtro" data-filter="indisponivel">Indisponíveis</button>
+            </div>
 
-            <button class="filter-btn" data-filter="disponivel">
-                Disponível
-            </button>
-
-            <button class="filter-btn" data-filter="em-uso">
-                Em Uso
-            </button>
-
-            <button class="filter-btn" data-filter="indisponivel">
-                Indisponível
-            </button>
         </div>
 
-
-        <!-- Grid -->
-
-
-
+        <!-- GRID -->
         <div class="grid" id="grid">
+
             <div id="semResultados" class="sem-resultados" style="display:none;">
                 Nenhum equipamento encontrado.
             </div>
+
             @foreach (var equipamento in Model)
             {
                 var classeStatus = equipamento.Status switch
@@ -178,6 +164,7 @@
                 <div class="card @classeStatus">
 
                     <div class="card-top">
+
                         <div class="card-icon">
                             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <rect x="2" y="3" width="20" height="14" rx="2" />
@@ -189,6 +176,7 @@
                             <div class="label">Equipamento</div>
                             <h3>@equipamento.Nome</h3>
                         </div>
+
                     </div>
 
                     <div class="card-row">
@@ -199,9 +187,7 @@
 
                         <div class="card-qty">
                             <span>Empréstimos</span>
-                            <strong>
-                                @equipamento.QuantidadeEmprestada/@equipamento.QuantidadeTotal
-                            </strong>
+                            <strong>@equipamento.QuantidadeEmprestada/@equipamento.QuantidadeTotal</strong>
                         </div>
 
                     </div>
@@ -209,19 +195,17 @@
                     @if (equipamento.Status == "Disponível" || equipamento.Status == "Parcial")
                     {
                         <form asp-controller="Reserva" asp-action="ConfirmarEmprestimo" method="post">
-
                             <input type="hidden" name="equipamentoId" value="@equipamento.Id" />
 
                             <button type="submit" class="btn-emprestar active">
                                 Emprestar
                             </button>
-
                         </form>
                     }
                     else if (equipamento.Status == "Em Uso")
                     {
                         <button class="btn-emprestar disabled" disabled>
-                            Todos Emprestados
+                            Todos emprestados
                         </button>
                     }
                     else
@@ -236,29 +220,38 @@
 
         </div>
 
+    </div>
 
-        <footer class="footer">
-            <div class="footer-brand">
-                <div class="footer-icon">
-                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="8" r="4" />
-                        <path d="M19.5 20a7.5 7.5 0 0 0-15 0" />
-                    </svg>
-                </div>
-                <div class="footer-brand-text">
-                    <strong>Nome da Instituição</strong>
-                    <span>Sistema de Monitoramento de Reservas</span>
-                </div>
-            </div>
-            <div class="footer-right">
-                <span>© 2026 — Todos os direitos reservados</span>
-                <span class="version">v1.0.0</span>
-            </div>
-        </footer>
+    <!-- FOOTER -->
+    <footer class="rodape">
 
-        <div class="help-btn" title="Ajuda">?</div>
-        <script src="~/js/Reserva.js">
-        </script>
+        <div class="rodape-marca">
+
+            <div class="rodape-icone">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="8" r="4" />
+                    <path d="M19.5 20a7.5 7.5 0 0 0-15 0" />
+                </svg>
+            </div>
+
+            <div class="rodape-texto">
+                <strong>Instituição</strong>
+                <span>Sistema de Monitoramento de Reservas</span>
+            </div>
+
+        </div>
+
+        <div class="rodape-direita">
+            <span>© 2026 — Todos os direitos reservados</span>
+            <span class="versao">v1.0.0</span>
+        </div>
+
+    </footer>
+
+    <div class="help-btn" title="Ajuda">?</div>
+
+    <script src="~/js/Reserva.js"></script>
+
 </body>
 
 </html>
