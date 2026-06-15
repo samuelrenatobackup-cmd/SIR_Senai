@@ -1,0 +1,180 @@
+@model SIR.Models.Equipamento
+
+<link rel="stylesheet" href="~/css/confirmar.css" />
+
+<div class="cr-page">
+
+    <div class="cr-modal">
+
+        <div class="cr-header">
+            <h2 id="crModalTitle">Confirmação de Reserva</h2>
+            <p>Leia atentamente os termos antes de confirmar o empréstimo do equipamento</p>
+        </div>
+
+        <div class="cr-terms-section">
+
+            <div class="cr-terms-label">
+                Termos e Condições de Uso
+            </div>
+
+            <div class="cr-terms-box" id="crTermsBox">
+
+                <div class="cr-term-block">
+                    <div class="cr-term-title info">
+                        <span class="icon">📋</span>
+                        Responsabilidade pelo Equipamento
+                    </div>
+
+                    <p class="cr-term-text">
+                        O solicitante assume total responsabilidade pelo equipamento durante
+                        o período de empréstimo, desde a retirada até a devolução. Danos,
+                        perdas ou extravios serão de inteira responsabilidade do usuário,
+                        que deverá ressarcir a instituição pelo valor integral do bem.
+                    </p>
+                </div>
+
+                <div class="cr-term-block">
+                    <div class="cr-term-title info">
+                        <span class="icon">🕐</span>
+                        Prazo de Devolução Obrigatório
+                    </div>
+
+                    <p class="cr-term-text">
+                        O equipamento deverá ser devolvido impreterivelmente na data e
+                        horário estipulados no momento da reserva. Não serão aceitas
+                        justificativas para atrasos não comunicados com antecedência mínima
+                        de 24 horas. A devolução fora do prazo implica na suspensão
+                        imediata do direito de futuras reservas.
+                    </p>
+                </div>
+
+                <div class="cr-term-block">
+                    <div class="cr-term-title warn">
+                        <span class="icon">⚠️</span>
+                        Penalidades por Atraso
+                    </div>
+
+                    <p class="cr-term-text">
+                        Atrasos na devolução acarretarão suspensão proporcional do direito
+                        de acesso ao sistema de reservas: 1 dia de atraso resulta em 7 dias
+                        de suspensão; atrasos superiores a 3 dias resultam em suspensão por
+                        30 dias e abertura de processo administrativo. Reincidências
+                        poderão resultar em suspensão permanente.
+                    </p>
+                </div>
+
+                <div class="cr-term-block">
+                    <div class="cr-term-title warn">
+                        <span class="icon">🔧</span>
+                        Estado de Conservação
+                    </div>
+
+                    <p class="cr-term-text">
+                        O equipamento deve ser devolvido nas mesmas condições em que foi
+                        retirado. Pequenos desgastes naturais são tolerados, porém danos
+                        causados por uso inadequado, quedas, exposição a líquidos ou
+                        qualquer ação que comprometa o funcionamento do equipamento deverão
+                        ser declarados no ato da devolução.
+                    </p>
+                </div>
+
+                <div class="cr-term-block">
+                    <div class="cr-term-title alert">
+                        <span class="icon">🚫</span>
+                        Uso Restrito e Finalidade
+                    </div>
+
+                    <p class="cr-term-text">
+                        O equipamento deve ser utilizado exclusivamente para atividades
+                        vinculadas à instituição e dentro dos limites estabelecidos pelas
+                        políticas internas. É expressamente proibido o empréstimo a
+                        terceiros, uso para fins comerciais pessoais, transporte para fora
+                        das dependências autorizadas sem prévia aprovação, e qualquer
+                        modificação de hardware ou software.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="cr-scroll-hint" id="crScrollHint">
+                ↓ Role para ler todos os termos
+            </div>
+
+        </div>
+
+        <div class="cr-accept">
+            <label>
+                <input type="checkbox" id="crAcceptCheck" onchange="crToggleConfirm(this.checked)" />
+
+                <span>
+                    Declaro que li e aceito integralmente os termos de uso do equipamento
+                    e me comprometo a cumprir todas as regras estabelecidas pela instituição.
+                </span>
+            </label>
+        </div>
+
+        <div class="cr-footer">
+
+            <form asp-controller="Reserva" asp-action="RealizarEmprestimo" method="post">
+
+                <input type="hidden" name="equipamentoId" value="@Model.Id" />
+
+                <div class="cr-actions">
+
+                    <a asp-controller="Reserva" asp-action="ListarEquipamentos" class="cr-btn cr-btn-cancel">
+                        Voltar
+                    </a>
+
+                    <button type="submit" id="crConfirmBtn" class="cr-btn cr-btn-confirm" disabled>
+
+                        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+
+                        Confirmar Reserva
+                    </button>
+
+                </div>
+
+            </form>
+
+            <p class="cr-hint" id="crHintText">
+                Aceite os termos para habilitar a confirmação
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    const crTermsBox = document.getElementById('crTermsBox');
+    const crScrollHint = document.getElementById('crScrollHint');
+    const crConfirmBtn = document.getElementById('crConfirmBtn');
+    const crHintText = document.getElementById('crHintText');
+
+    function crToggleConfirm(checked) {
+
+        crConfirmBtn.disabled = !checked;
+
+        crHintText.textContent = checked
+            ? '✓ Termos aceitos – você pode confirmar a reserva'
+            : 'Aceite os termos para habilitar a confirmação';
+
+        crHintText.style.color = checked
+            ? 'rgba(34,197,94,0.7)'
+            : 'rgba(255,255,255,0.3)';
+    }
+
+    crTermsBox.addEventListener('scroll', function () {
+
+        if (crTermsBox.scrollTop > 40) {
+            crScrollHint.style.opacity = '0';
+        }
+
+    });
+
+</script>

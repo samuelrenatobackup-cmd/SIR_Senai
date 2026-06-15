@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -7,14 +8,10 @@ namespace SIR.Models
     {
         public int Id { get; set; }
 
-        [ForeignKey("Usuario")]
         public int UsuarioId { get; set; }
-
         public Usuario? Usuario { get; set; }
 
-        [ForeignKey("Equipamento")]
         public int EquipamentoId { get; set; }
-
         public Equipamento? Equipamento { get; set; }
 
         [Required]
@@ -24,7 +21,11 @@ namespace SIR.Models
         public TimeSpan HoraReserva { get; set; }
 
         [Required]
-        public TimeSpan HoraDevolucao { get; set; }
+        public TimeSpan HoraDevolucaoPrevista { get; set; }
+
+        public DateTime? DataDevolucao { get; set; }
+
+        public TimeSpan? HoraDevolucaoReal { get; set; }
 
         [Required]
         public string Status { get; set; }

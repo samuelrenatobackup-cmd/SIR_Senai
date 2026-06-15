@@ -1,0 +1,270 @@
+
+/* ── Reset & base ─────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ── Página ──────────────────────────────────────────────── */
+body {
+    background: #0f1115;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+.cr-page {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* ── Card principal ──────────────────────────────────────── */
+.cr-modal {
+    background: #161a22;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    width: 100%;
+    max-width: 900px;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+}
+
+/* ── Header ──────────────────────────────────────────────── */
+.cr-header {
+    padding: 1.5rem 1.75rem 1.25rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.cr-header h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+}
+
+.cr-header p {
+    font-size: 0.8125rem;
+    color: rgba(255,255,255,0.5);
+    margin-top: 0.25rem;
+}
+
+/* ── Terms section ───────────────────────────────────────── */
+.cr-terms-section {
+    padding: 1.25rem 1.75rem 0;
+}
+
+.cr-terms-label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 0.75rem;
+}
+
+/* ── Caixa de termos ─────────────────────────────────────── */
+.cr-terms-box {
+    background: #0f1115;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 1.125rem 1.25rem;
+}
+
+.cr-term-block {
+    margin-bottom: 1.25rem;
+}
+
+.cr-term-block:last-child {
+    margin-bottom: 0;
+}
+
+.cr-term-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.cr-term-title .icon {
+    font-size: 0.875rem;
+    flex-shrink: 0;
+}
+
+.cr-term-title.warn .icon {
+    color: #f59e0b;
+}
+
+.cr-term-title.alert .icon {
+    color: #e03030;
+}
+
+.cr-term-title.info .icon {
+    color: rgba(255,255,255,0.5);
+}
+
+.cr-term-text {
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.6);
+}
+
+/* ── Hint ────────────────────────────────────────────────── */
+.cr-scroll-hint {
+    text-align: center;
+    font-size: 0.6875rem;
+    color: rgba(255,255,255,0.25);
+    padding: 0.75rem 0;
+    user-select: none;
+}
+
+/* ── Checkbox ────────────────────────────────────────────── */
+.cr-accept {
+    padding: 1.125rem 1.75rem;
+}
+
+.cr-accept label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    cursor: pointer;
+}
+
+.cr-accept input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    margin-top: 1px;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    transition: background .15s, border-color .15s;
+}
+
+.cr-accept input[type="checkbox"]:checked {
+    background: #22c55e;
+    border-color: #22c55e;
+}
+
+.cr-accept input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 6px;
+    height: 10px;
+    border: 2px solid #0f1115;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+}
+
+.cr-accept span {
+    font-size: 0.8125rem;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.6);
+}
+
+.cr-accept a {
+    color: #ffffff;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+/* ── Footer ──────────────────────────────────────────────── */
+.cr-footer {
+    padding: 0 1.75rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.cr-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+/* ── Botões ──────────────────────────────────────────────── */
+.cr-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: all .15s ease;
+}
+
+.cr-btn:active {
+    transform: scale(0.97);
+}
+
+.cr-btn-cancel {
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.75);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.cr-btn-cancel:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.cr-btn-confirm {
+    background: #e03030;
+    color: #fff;
+}
+
+.cr-btn-confirm:hover:not(:disabled) {
+    background: #c42828;
+}
+
+.cr-btn-confirm:disabled {
+    background: rgba(224,48,48,0.3);
+    color: rgba(255,255,255,0.35);
+    cursor: not-allowed;
+}
+
+.cr-hint {
+    text-align: center;
+    font-size: 0.6875rem;
+    color: rgba(255,255,255,0.3);
+}
+
+/* ── Responsivo ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+    body {
+        padding: 16px;
+    }
+
+    .cr-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .cr-header,
+    .cr-terms-section,
+    .cr-accept,
+    .cr-footer {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+

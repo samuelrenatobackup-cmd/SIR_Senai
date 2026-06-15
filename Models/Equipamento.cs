@@ -16,6 +16,8 @@ namespace SIR.Models
         [Required]
         public int QuantidadeDisponivel { get; set; }
 
+        public string? Icone { get; set; }
+
         public ICollection<Reserva>? Reservas { get; set; }
 
         [NotMapped]
