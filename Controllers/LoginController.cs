@@ -24,91 +24,68 @@ namespace SIR.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AutenticarUsuario(string email, string senha)
+public async Task<IActionResult> AutenticarUsuario(string email, string senha)
+{
+    var usuario = await _context.Usuarios
+        .FirstOrDefaultAsync(u => u.Email == email);
+
+    if (usuario == null)
+    {
+        ViewBag.Erro = "Email ou senha inválidos.";
+        return View("Index");
+    }
+
+    bool senhaValida = false;
+
+    if (usuario.Senha.StartsWith("$2"))
+    {
+        senhaValida = BCrypt.Net.BCrypt.Verify(senha, usuario.Senha);
+    }
+    else
+    {
+        senhaValida = usuario.Senha == senha;
+
+        if (senhaValida)
         {
-            var usuario = await _context.Usuarios
-                .FirstOrDefaultAsync(u => u.Email == email);
-
-            if (usuario == null || 
-                !BCrypt.Net.BCrypt.Verify(senha, usuario.Senha))
-            {
-                ViewBag.Erro = "Email ou senha inválidos";
-                return View("Index");
-            }
-
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
-                new Claim(ClaimTypes.Name, usuario.Nome),
-                new Claim(ClaimTypes.Email, usuario.Email),
-                new Claim(ClaimTypes.Role, usuario.TipoUsuario ? "Admin" : "Usuario")
-            };
-
-            var identidade = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-            var principal = new ClaimsPrincipal(identidade);
-
-            await HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                principal,
-                new AuthenticationProperties
-                {
-                    IsPersistent = true,
-                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30)
-                });
-
-            if (usuario.TipoUsuario)
-                return RedirectToAction("Index", "Admin");
-
-            return RedirectToAction("ListarEquipamentos", "Reserva");
+            usuario.Senha = BCrypt.Net.BCrypt.HashPassword(senha);
+            await _context.SaveChangesAsync();
         }
+    }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult CadastrarUsuario(
-            string nome,
-            string sobrenome,
-            string email,
-            string senha,
-            string confirmarSenha)
+    if (!senhaValida)
+    {
+        ViewBag.Erro = "Email ou senha inválidos.";
+        return View("Index");
+    }
+
+    var claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
+        new Claim(ClaimTypes.Name, usuario.Nome),
+        new Claim(ClaimTypes.Email, usuario.Email),
+        new Claim(ClaimTypes.Role, usuario.TipoUsuario ? "Admin" : "Usuario")
+    };
+
+    var identidade = new ClaimsIdentity(
+        claims,
+        CookieAuthenticationDefaults.AuthenticationScheme);
+
+    var principal = new ClaimsPrincipal(identidade);
+
+    await HttpContext.SignInAsync(
+        CookieAuthenticationDefaults.AuthenticationScheme,
+        principal,
+        new AuthenticationProperties
         {
-            if (senha != confirmarSenha)
-            {
-                ViewBag.ErroCadastro = "As senhas não coincidem.";
-                return View("Index");
-            }
+            IsPersistent = true,
+            ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30)
+        });
 
-            if (_context.Usuarios.Any(u => u.Email == email))
-            {
-                ViewBag.ErroCadastro = "Este email já está cadastrado.";
-                return View("Index");
-            }
+    if (usuario.TipoUsuario)
+        return RedirectToAction("Index", "Admin");
 
-            if (!ValidarForcaSenha(senha))
-            {
-                ViewBag.ErroCadastro =
-                    "Senha fraca! Use no mínimo 8 caracteres, com maiúscula, minúscula, número e símbolo.";
-
-                return View("Index");
-            }
-
-            var usuario = new Usuario
-            {
-                Nome = nome,
-                Sobrenome = sobrenome,
-                Email = email,
-                Senha = BCrypt.Net.BCrypt.HashPassword(senha),
-                TipoUsuario = false
-            };
-
-            _context.Usuarios.Add(usuario);
-            _context.SaveChanges();
-
-            TempData["Sucesso"] = "Cadastro realizado com sucesso!";
-
-            return RedirectToAction(nameof(Index));
-        }
-
+    return RedirectToAction("ListarEquipamentos", "Reserva");
+}
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
