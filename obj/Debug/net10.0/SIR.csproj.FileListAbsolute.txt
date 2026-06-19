@@ -504,6 +504,6 @@ C:\Users\54157995830\Documents\SIR_Senai\obj\Debug\net10.0\refint\SIR.dll
 C:\Users\54157995830\Documents\SIR_Senai\obj\Debug\net10.0\SIR.pdb
 C:\Users\54157995830\Documents\SIR_Senai\obj\Debug\net10.0\SIR.genruntimeconfig.cache
 C:\Users\54157995830\Documents\SIR_Senai\obj\Debug\net10.0\ref\SIR.dll
-C:\Users\54157995830\Documents\SIR_Senai\obj\Debug\net10.0\compressed\aza36h7kj5-{0}-5dvakvtjcs-5dvakvtjcs.gz
 C:\Users\54157995830\Documents\SIR_Senai\obj\Debug\net10.0\compressed\z79uxbroh1-{0}-gnju2j0w18-gnju2j0w18.gz
 C:\Users\54157995830\Documents\SIR_Senai\obj\Debug\net10.0\compressed\68lajy9i26-{0}-70am7pavp2-70am7pavp2.gz
+C:\Users\54157995830\Documents\SIR_Senai\obj\Debug\net10.0\compressed\aza36h7kj5-{0}-kangam71kf-kangam71kf.gz

@@ -44,7 +44,7 @@ body {
     background: var(--bg-page);
     color: var(--text-primary);
     font-family: var(--font-sans);
-    min-height: 100vh;
+    height: 100vh;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -143,8 +143,9 @@ body {
 
 /* ---------- Conteúdo principal ---------- */
 .conteudo-reservas {
-    max-width: 1280px;
+    
     margin: 0 auto;
+    height: 100%;
     padding: 2.5rem 2rem 4rem;
 }
 
