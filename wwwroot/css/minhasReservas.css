@@ -219,6 +219,10 @@ body {
     /* Para ícones SVG */
     color: var(--accent-red);
 }
+.icone-equipamento{
+    width: 80px;
+    height: 80px;
+}
 
 .icone-wrapper svg { width: 36px; height: 36px; }
 

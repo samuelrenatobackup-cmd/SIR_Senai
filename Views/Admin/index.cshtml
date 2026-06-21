@@ -16,190 +16,198 @@
     <link rel="stylesheet" href="~/css/admin.css" />
 </head>
 
-
 <div class="admin-shell">
 
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
 
-<aside class="sidebar">
+        <a href="#" class="sidebar__brand">
+            <div class="sidebar__brand-icon">A</div>
 
-    <a href="#" class="sidebar__brand">
-        <div class="sidebar__brand-icon">A</div>
+            <div>
+                <div class="sidebar__brand-name">
+                    Admin Panel
+                </div>
 
-        <div>
-            <div class="sidebar__brand-name">
-                Admin Panel
+                <small style="color: var(--text-secondary);">
+                    voltar ao sistema
+                </small>
             </div>
-
-            <small style="color: var(--text-secondary);">
-                voltar ao sistema
-            </small>
-        </div>
-    </a>
-
-    <nav class="sidebar__nav">
-
-        <a asp-controller="Admin"
-           asp-action="Reservas"
-           class="ativo">
-            <i class="fa-solid fa-calendar-check"></i>
-            <span>Reservas</span>
         </a>
 
-        <a asp-controller="Usuario"
-           asp-action="Index">
-            <i class="fa-solid fa-users"></i>
-            <span>Usuários</span>
-        </a>
+        <nav class="sidebar__nav">
 
-        <a asp-controller="Equipamento"
-           asp-action="Create">
-            <i class="fa-solid fa-plus-circle"></i>
-            <span>Adicionar Equipamentos</span>
-        </a>
+            <a href="#" class="ativo">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span>Reservas</span>
+            </a>
 
-    </nav>
+            @*
+            <a asp-controller="Usuario"
+               asp-action="Index">
+                <i class="fa-solid fa-users"></i>
+                <span>Usuários</span>
+            </a>
 
-    <div class="sidebar__footer">
+            <a asp-controller="Equipamento"
+               asp-action="Create">
+                <i class="fa-solid fa-plus-circle"></i>
+                <span>Adicionar Equipamentos</span>
+            </a>
+            *@
 
-        <a asp-controller="Login"
-           asp-action="Logout"
-           class="sidebar__logout">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            <span>Sair</span>
-        </a>
+        </nav>
 
-        <div class="sidebar__senai">
-            <div class="sidebar__senai-badge">
-                SENAI
-            </div>
+        <div class="sidebar__footer">
+
+            <a asp-controller="Login" asp-action="Logout" class="sidebar__logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Sair</span>
+            </a>
+
+            @* <div class="sidebar__senai">
+                <div class="sidebar__senai-badge">
+                    SENAI
+                </div>
+            </div> *@
+
         </div>
 
-    </div>
+    </aside>
 
-</aside>
+    <!-- CONTEÚDO -->
+    <main class="conteudo-principal">
 
-<main class="conteudo-principal">
+        <div class="pagina-cabecalho">
 
-    <div class="pagina-cabecalho">
+            <div>
+                <h1 class="pagina-titulo">Reservas</h1>
 
-        <div>
-            <h1 class="pagina-titulo">Reservas</h1>
-
-            <p class="pagina-subtitulo">
-                Gerenciamento de equipamentos reservados
-            </p>
-        </div>
-
-        <a href="#"
-           class="btn-nova-reserva">
-            <i class="fa-solid fa-plus"></i>
-            Nova Reserva
-        </a>
-
-    </div>
-
-    <div class="tabela-container">
-
-        <div class="tabela-barra">
-
-            <div class="tabela-busca">
-                <i class="fa-solid fa-magnifying-glass"></i>
-
-                <input type="text"
-                       placeholder="Buscar equipamento ou usuário..."
-                       class="tabela-busca__input" />
+                <p class="pagina-subtitulo">
+                    Gerenciamento de equipamentos reservados
+                </p>
             </div>
 
         </div>
 
-        <table class="tabela">
+        <div class="tabela-container">
 
-            <thead class="tabela__cabecalho">
-                <tr>
-                    <th>ID</th>
-                    <th>Usuário</th>
-                    <th>Equipamento</th>
-                    <th>Status</th>
-                    <th>Reserva</th>
-                    <th>Devolução</th>
-                </tr>
-            </thead>
+            <!-- BARRA -->
+            <div class="tabela-barra">
 
-            <tbody class="tabela__corpo">
+                <div class="tabela-busca">
+                    <i class="fa-solid fa-magnifying-glass"></i>
 
-                @foreach (var reserva in Model)
-                {
-                    <tr class="tabela__linha">
+                    <input type="text" id="campoBusca" placeholder="Buscar equipamento ou usuário..."
+                           class="tabela-busca__input" />
+                </div>
 
-                        <td class="tabela__id">
-                            #@reserva.Id
-                        </td>
+            </div>
 
-                        <td class="tabela__usuario">
+            <!-- TABELA -->
+            <div class="tabela-wrapper">
 
-                            <div class="usuario-avatar">
-                                @(
-                                    !string.IsNullOrEmpty(reserva.Usuario?.Nome)
-                                    ? reserva.Usuario.Nome.Substring(0,1)
-                                    : "?"
-                                )
-                            </div>
+                <table class="tabela">
 
-                            <span>
-                                @(reserva.Usuario?.Nome ?? "Sem usuário")
-                            </span>
+                    <thead class="tabela__cabecalho">
+                        <tr>
+                            <th>ID</th>
+                            <th>Usuário</th>
+                            <th>Equipamento</th>
+                            <th>Status</th>
+                            <th>Reserva</th>
+                            <th>Devolução</th>
+                        </tr>
+                    </thead>
 
-                        </td>
+                    <tbody class="tabela__corpo">
 
-                        <td class="tabela__equipamento">
-                            <span>
-                                @(reserva.Equipamento?.Nome ?? "Sem equipamento")
-                            </span>
-                        </td>
+                        @foreach (var reserva in Model)
+                        {
+                            <tr class="tabela__linha">
 
-                        <td>
+                                <!-- ID -->
+                                <td class="tabela__id" data-label="ID">
+                                    #@reserva.Id
+                                </td>
 
-                            @if (reserva.Status == "Ativo")
-                            {
-                                <span class="etiqueta-status etiqueta-status--ativo">
-                                    Ativo
-                                </span>
-                            }
-                            else
-                            {
-                                <span class="etiqueta-status etiqueta-status--inativo">
-                                    @reserva.Status
-                                </span>
-                            }
+                                <!-- USUÁRIO -->
+                                <td class="tabela__usuario" data-label="Usuário">
 
-                        </td>
+                                    <div class="usuario-avatar">
+                                        @(
+                                            !string.IsNullOrEmpty(reserva.Usuario?.Nome)
+                                            ? reserva.Usuario.Nome.Substring(0, 1)
+                                            : "?"
+                                        )
+                                    </div>
 
-                        <td>
-                            @reserva.DataReserva.ToString("dd/MM/yyyy HH:mm")
-                        </td>
+                                    <span>
+                                        @(reserva.Usuario?.Nome ?? "Sem usuário")
+                                    </span>
 
-                        <td>
-                            @(reserva.DataDevolucao?.ToString("dd/MM/yyyy HH:mm")
-                                ?? "Pendente")
-                        </td>
+                                </td>
 
-                    </tr>
-                }
+                                <!-- EQUIPAMENTO -->
+                                <td class="tabela__equipamento" data-label="Equipamento">
+                                    <span>
+                                        @(reserva.Equipamento?.Nome ?? "Sem equipamento")
+                                    </span>
+                                </td>
 
-            </tbody>
+                                <!-- STATUS -->
+                                <td data-label="Status">
 
-        </table>
+                                    @if (reserva.Status == "Ativo" || reserva.Status == "Finalizado")
+                                    {
+                                        <span class="etiqueta-status etiqueta-status--ativo">
+                                            @reserva.Status
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="etiqueta-status etiqueta-status--inativo">
+                                            @reserva.Status
+                                        </span>
+                                    }
 
-        <div class="tabela-rodape">
+                                </td>
 
-            <span class="tabela-rodape__info">
-                Mostrando @Model.Count reserva(s)
-            </span>
+                                <!-- DATA RESERVA -->
+                                <td data-label="Reserva">
+                                    @reserva.DataReserva.ToString("dd/MM/yyyy HH:mm")
+                                </td>
+
+                                <!-- DATA DEVOLUÇÃO -->
+                                <td data-label="Devolução">
+                                    @(reserva.DataDevolucao?.ToString("dd/MM/yyyy HH:mm")
+                                        ?? "Pendente")
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- RODAPÉ -->
+            <div class="tabela-rodape">
+
+                <span class="tabela-rodape__info" id="contadorReservas">
+                    Mostrando @Model.Count reserva(s)
+                </span>
+
+            </div>
 
         </div>
 
-    </div>
-
-</main>
+    </main>
 
 </div>
+
+<script src="~/js/Admin.js">
+
+</script>

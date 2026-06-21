@@ -53,7 +53,45 @@ html, body {
 /* ============================================================
    LAYOUT SHELL
    ============================================================ */
+/* ── Status badges ── */
+.etiqueta-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
 
+.etiqueta-status::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* VERDE */
+.etiqueta-status--ativo {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.12);
+}
+
+.etiqueta-status--ativo::before {
+  background: #22c55e;
+}
+
+/* VERMELHO */
+.etiqueta-status--inativo {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.12);
+}
+
+.etiqueta-status--inativo::before {
+  background: #ef4444;
+}
 .admin-shell {
   display: flex;
   min-height: 100vh;

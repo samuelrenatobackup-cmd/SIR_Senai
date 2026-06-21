@@ -83,28 +83,30 @@
                     var codigoReserva = $"RES-{reserva.Id:D3}";
 
                     @* Ícone emoji do equipamento (usa o campo Icone se existir, senão padrão) *@
-                    var iconeEquip = reserva.Equipamento?.Icone ?? "📦";
+                    @* var iconeEquip = reserva.Equipamento?.Icone ?? "📦"; *@
 
                     <div class="card-reserva">
 
                         <!-- Ícone do equipamento -->
-                <div class="card-reserva-icone">
+                        <div class="card-reserva-icone">
                             <div class="icone-wrapper">
-                                @iconeEquip
+                                <img src="@Url.Content($"~/imgs/{reserva.Equipamento?.Icone}")"
+                                     alt="@reserva.Equipamento?.Nome" class="icone-equipamento" />
                             </div>
+                            @* @iconeEquip *@
                         </div>
 
                         <!-- Nome e código -->
-                <div class="card-reserva-nome">
+                        <div class="card-reserva-nome">
                             <h3>@reserva.Equipamento?.Nome</h3>
                             <span class="card-reserva-codigo">@codigoReserva</span>
                         </div>
 
                         <!-- Linhas de informação -->
-                <div class="card-reserva-info">
+                        <div class="card-reserva-info">
 
                             <!-- Status -->
-                    <div class="info-linha">
+                            <div class="info-linha">
                                 <div class="info-linha-esquerda">
                                     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <circle cx="12" cy="12" r="10" />
@@ -133,7 +135,7 @@
                             </div>
 
                             <!-- Data de Retirada -->
-                    <div class="info-linha">
+                            <div class="info-linha">
                                 <div class="info-linha-esquerda">
                                     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <rect x="3" y="4" width="18" height="18" rx="2" />
@@ -149,7 +151,7 @@
                             </div>
 
                             <!-- Data de Devolução -->
-                    <div class="info-linha">
+                            <div class="info-linha">
                                 <div class="info-linha-esquerda">
                                     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <rect x="3" y="4" width="18" height="18" rx="2" />
@@ -165,7 +167,7 @@
                             </div>
 
                             <!-- Horário de Retirada -->
-                    <div class="info-linha">
+                            <div class="info-linha">
                                 <div class="info-linha-esquerda">
                                     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <circle cx="12" cy="12" r="10" />
@@ -194,7 +196,7 @@
                         else
                         {
                             <button class="btn-devolucao vermelho"
-                    onclick="abrirModal('@reserva.Id', '@reserva.Equipamento?.Nome')">
+                                    onclick="abrirModal('@reserva.Id', '@reserva.Equipamento?.Nome')">
                                 <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <polyline points="1 4 1 10 7 10" />
                                     <path d="M3.51 15a9 9 0 1 0 .49-3.54" />
@@ -210,8 +212,6 @@
         </div>
     </main>
 
-    <!-- ===== BOTÃO AJUDA ===== -->
-    <div class="help-btn" title="Ajuda">?</div>
 
     <!-- ===== MODAL DE CONFIRMAÇÃO DE DEVOLUÇÃO ===== -->
     <div class="modal-overlay" id="modalOverlay">
@@ -219,7 +219,7 @@
 
             <div class="modal-icone">
                 <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"
-                    style="width:32px;height:32px;color:#e63946">
+                     style="width:32px;height:32px;color:#e63946">
                     <polyline points="1 4 1 10 7 10" />
                     <path d="M3.51 15a9 9 0 1 0 .49-3.54" />
                 </svg>
@@ -238,7 +238,7 @@
                 </button>
 
                 <form id="formDevolucao" asp-controller="Reserva" asp-action="ConfirmarDevolucao" method="post"
-                    style="flex:1;display:contents;">
+                      style="flex:1;display:contents;">
 
                     @Html.AntiForgeryToken()
                     <input type="hidden" id="modalReservaId" name="reservaId" value="" />
