@@ -96,28 +96,31 @@ namespace SIR.Controllers
             string senha,
             string confirmarSenha)
         {
-            if (senha != confirmarSenha)
-            {
-                ViewBag.ErroCadastro = "As senhas não coincidem.";
-                return View("Index");
-            }
 
-            if (!ValidarForcaSenha(senha))
-            {
-                ViewBag.ErroCadastro =
-                    "A senha deve conter pelo menos 8 caracteres, letra maiúscula, minúscula, número e caractere especial.";
-                return View("Index");
-            }
-
-            var usuarioExistente = await _context.Usuarios
+               if (senha != confirmarSenha)
+    {
+       ViewBag.AbaAtiva = "cadastro";
+        ViewBag.ErroCadastro = "As senhas não coincidem.";
+        return View("Index");
+    }
+ 
+    if (!ValidarForcaSenha(senha))
+    {
+       ViewBag.AbaAtiva = "cadastro";
+        ViewBag.ErroCadastro = "A senha deve conter ...";
+        return View("Index");
+    }
+    var usuarioExistente = await _context.Usuarios
                 .FirstOrDefaultAsync(u => u.Email == email);
 
-            if (usuarioExistente != null)
-            {
-                ViewBag.ErroCadastro = "Este e-mail já está cadastrado.";
-                return View("Index");
-            }
-
+    if (usuarioExistente != null)
+    {
+      ViewBag.AbaAtiva = "cadastro";
+        ViewBag.ErroCadastro = "Este e-mail já está cadastrado.";
+        return View("Index");
+    }
+            
+           
             var usuario = new Usuario
             {
                 Nome = nome,
