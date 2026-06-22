@@ -822,7 +822,6 @@ C:\Users\54157995830\Pictures\SIR_Senai\obj\Debug\net10.0\compressed\fda7ap2eo1-
 C:\Users\54157995830\Pictures\SIR_Senai\obj\Debug\net10.0\compressed\ifvtbhygrf-{0}-47mkgrld64-47mkgrld64.gz
 C:\Users\54157995830\Pictures\SIR_Senai\obj\Debug\net10.0\compressed\z79uxbroh1-{0}-gnju2j0w18-gnju2j0w18.gz
 C:\Users\54157995830\Pictures\SIR_Senai\obj\Debug\net10.0\compressed\w8mcs26yr2-{0}-qn1d2sbhjj-qn1d2sbhjj.gz
-C:\Users\54157995830\Pictures\SIR_Senai\obj\Debug\net10.0\compressed\0ka1dyu8qa-{0}-fw493jnyvx-fw493jnyvx.gz
 C:\Users\54157995830\Pictures\SIR_Senai\obj\Debug\net10.0\compressed\jalcpe223o-{0}-03hjc8e09r-03hjc8e09r.gz
 C:\Users\54157995830\Pictures\SIR_Senai\obj\Debug\net10.0\compressed\ditxllbzuq-{0}-48y08845bh-48y08845bh.gz
 C:\Users\54157995830\Pictures\SIR_Senai\obj\Debug\net10.0\compressed\5rzegs5yoz-{0}-356vix0kms-356vix0kms.gz
@@ -853,3 +852,4 @@ C:\Users\54157995830\Pictures\SIR_Senai\obj\Debug\net10.0\SIR.genruntimeconfig.c
 C:\Users\54157995830\Pictures\SIR_Senai\obj\Debug\net10.0\ref\SIR.dll
 C:\Users\54157995830\Pictures\SIR_Senai\obj\Debug\net10.0\compressed\1y627s03ni-{0}-cdz1udzvc3-cdz1udzvc3.gz
 C:\Users\54157995830\Pictures\SIR_Senai\obj\Debug\net10.0\compressed\s6ale7mir6-{0}-zsjfv34m63-zsjfv34m63.gz
+C:\Users\54157995830\Pictures\SIR_Senai\obj\Debug\net10.0\compressed\vs6l9bjf4w-{0}-8p4mzh4v4n-8p4mzh4v4n.gz
